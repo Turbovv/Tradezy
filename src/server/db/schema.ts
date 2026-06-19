@@ -31,6 +31,28 @@ export const posts = createTable(
   ]
 );
 
+export const products = createTable(
+  "product",
+  (d) => ({
+    id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
+    name: d.varchar({ length: 256 }).notNull(),
+    description: d.text(),
+    priceCents: d.integer().notNull().default(0),
+    inStock: d.boolean().notNull().default(true),
+    images: d
+      .varchar({ length: 1024 })
+      .array()
+      .notNull()
+      .default([]),
+    createdAt: d
+      .timestamp({ withTimezone: true })
+      .$defaultFn(() => new Date())
+      .notNull(),
+    updatedAt: d.timestamp({ withTimezone: true }).$onUpdate(() => new Date()),
+  }),
+  (t) => [index("product_name_idx").on(t.name)]
+);
+
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),

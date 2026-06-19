@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1781856270248,
+      "tag": "0000_sparkling_mysterio",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1781858631368,
+      "tag": "0001_previous_newton_destine",
+      "breakpoints": true
+    }
+  ]
+}
