@@ -1,6 +1,7 @@
 import express, { type Express, type NextFunction, type Request, type Response } from "express";
 
 import productsRouter from "./routes/products";
+import uploadRouter from "./routes/upload";
 import cors from "cors";
 
 export function createApp(): Express {
@@ -19,6 +20,7 @@ export function createApp(): Express {
   });
 
   app.use("/products", productsRouter);
+  app.use("/upload", uploadRouter);
 
   app.use((_req, res) => {
     res.status(404).json({ error: "Not found" });

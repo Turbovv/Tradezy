@@ -1,6 +1,34 @@
 import axios from "axios";
 
-const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/products`;
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = `${BASE_URL}/products`;
+
+type SignedUpload = { uploadUrl: string; fileUrl: string; key: string };
+
+export const uploadImages = async (files: File[]): Promise<string[]> => {
+  if (files.length === 0) return [];
+
+  const { data } = await axios.post<{ uploads: SignedUpload[] }>(
+    `${BASE_URL}/upload`,
+    {
+      files: files.map((file) => ({
+        fileName: file.name,
+        contentType: file.type,
+        fileSize: file.size,
+      })),
+    }
+  );
+
+  await Promise.all(
+    data.uploads.map((upload, i) =>
+      axios.put(upload.uploadUrl, files[i], {
+        headers: { "Content-Type": files[i]!.type },
+      })
+    )
+  );
+
+  return data.uploads.map((upload) => upload.fileUrl);
+};
 
 export type CreateProductDTO = {
   name: string;
