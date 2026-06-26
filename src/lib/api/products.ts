@@ -31,6 +31,7 @@ export const uploadImages = async (files: File[]): Promise<string[]> => {
 };
 
 export type CreateProductDTO = {
+  id: number;
   name: string;
   description: string;
   priceCents: number;
@@ -49,7 +50,7 @@ export const getProducts = async () => {
 };
 
 export const getProductById = async (id: string | number) => {
-  const res = await axios.get(`${API_URL}/${id}`);
+  const res = await axios.get<CreateProductDTO>(`${API_URL}/${id}`);
   return res.data;
 };
 
