@@ -31,7 +31,7 @@ export const uploadImages = async (files: File[]): Promise<string[]> => {
 };
 
 export type CreateProductDTO = {
-  id: number;
+  id?: number;
   name: string;
   description: string;
   priceCents: number;
