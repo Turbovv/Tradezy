@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
 import EditProductForm from "~/app/products/[id]/components/edit-product";
-import type { CreateProductDTO } from "~/lib/api/products";
+import type { ProductDTO } from "~/lib/api/products";
 
 export default function ProductDetails({
   product,
 }: {
-  product: CreateProductDTO & { id: number };
+  product: ProductDTO;
 }) {
   const [isEditing, setIsEditing] = useState(false);
   return (
@@ -34,6 +34,7 @@ export default function ProductDetails({
             key={img}
             src={img}
             className="w-32 h-32 object-cover rounded"
+            alt={product.name}
           />
         ))}
       </div>

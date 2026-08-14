@@ -57,6 +57,9 @@ export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
+  password: text("password"),
+  confirmed: boolean("confirmed").notNull().default(false),
+  confirmationCode: text("confirmation_code"),
   emailVerified: boolean("email_verified")
     .$defaultFn(() => false)
     .notNull(),

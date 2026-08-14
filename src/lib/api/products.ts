@@ -30,13 +30,17 @@ export const uploadImages = async (files: File[]): Promise<string[]> => {
   return data.uploads.map((upload) => upload.fileUrl);
 };
 
-export type CreateProductDTO = {
-  id?: number;
+export type ProductDTO = {
+  id: number;
   name: string;
   description: string;
   priceCents: number;
   inStock: boolean;
   images: string[];
+};
+
+export type CreateProductDTO = Omit<ProductDTO, "id"> & {
+  id?: number;
 };
 
 export const createProduct = async (data: CreateProductDTO) => {
@@ -45,12 +49,12 @@ export const createProduct = async (data: CreateProductDTO) => {
 };
 
 export const getProducts = async () => {
-  const res = await axios.get(API_URL);
+  const res = await axios.get<ProductDTO[]>(API_URL);
   return res.data;
 };
 
 export const getProductById = async (id: string | number) => {
-  const res = await axios.get<CreateProductDTO>(`${API_URL}/${id}`);
+  const res = await axios.get<ProductDTO>(`${API_URL}/${id}`);
   return res.data;
 };
 

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { updateProduct, uploadImages, type CreateProductDTO } from "~/lib/api/products";
+import { updateProduct, uploadImages, type ProductDTO,} from "~/lib/api/products";
 
 type EditProductFormProps = {
-  product: CreateProductDTO & { id: number };
+  product: ProductDTO;
   onClose: () => void;
 };
 
